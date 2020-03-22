@@ -1,124 +1,78 @@
-import React,{Component} from 'react';
-import {StyleSheet, ActivityIndicator,Modal,View} from 'react-native';
-import { Container, Header, Content, Card, CardItem, Text, Body,Button,Item,Input,Icon } from 'native-base';
-
+import React, { Component } from 'react';
+import { Container, Content, Card, CardItem, Body, Text, Button, Item, Input, Icon } from 'native-base';
+import { StyleSheet, Alert } from 'react-native';
+import api from '../data/api';
 
 class Login extends Component {
-
-  constructor(props){
-    super(props);
-    this.state={
-      nombre:'',
-      contraseña:'',
-      isloading: true,
-    } 
-  } //End constructor
-  ShowHideActivityIndicator = () =>{
-    const navegar=this.props.navigation;
-    if(this.state.isLoading == true)
-    {
-      this.setState({isLoading: false})
+    constructor(props){
+        super(props);
+        this.state = {
+            username: '',
+            pass: ''
+        }
     }
-    else
-    {
-      this.setState({isLoading: true})
-      setTimeout(() => {
-        navegar.navigate('Principal',{nombre:this.state.nombre,contraseña:this.state.contraseña});
-        this.setState({isLoading: false})
-      },1500);
-    }
-  }
 
-  render(){
-    const navegar = this.props.navigation;
-    return (
-      <Container>
-          <Content padder contentContainerStyle={misEstilos.content}>
-            <Card>
-              {
-                this.state.isLoading ?  
-                <Modal
-                  transparent = {true} 
-                  animationType = {'none'} 
-                  visible = {this.state.isLoading}> 
-                    <View style = {misEstilos.modalBackground}> 
-                      <View style = {misEstilos.activityIndicator}> 
-                        <ActivityIndicator style={{padding: 20}}/> 
-                      </View> 
-                    </View> 
-                </Modal> : null
-                }
-                <CardItem header bordered>
-                  <Text style={misEstilos.textCenter}>Inicio de sesión</Text>
-                </CardItem>
-                <CardItem bordered>
-                  <Body>
-                    <Item inlineLabel>
-                      <Icon type='FontAwesome' name='user' />
-                        <Input placeholder="Nombre de usuario" value={this.state.nombre} onChangeText={(nombre)=> this.setState({nombre}) } />
-                      </Item>
-                      <Item inlineLabel last>
-                        <Icon type='FontAwesome' name='lock' />
-                        <Input placeholder="Contraseña" value={this.state.contraseña} onChangeText={(contraseña)=> this.setState({contraseña}) } /> 
-                    </Item>
-                  </Body>
-                </CardItem>
-             <Button success style={misEstilos.boton} onPress={this.ShowHideActivityIndicator}>
-              <Text> 
-                  Entrar 
-              </Text>
-             </Button>
-              <Button primary style={misEstilos.boton1} onPress={() => {
-                  navegar.navigate('Registro', {
-                    titulo: 'Registro',
-                  });
-                }}>
-                <Text>REGISTRATE</Text>
-              </Button>
-            </Card>
-          </Content>
-    </Container>
-    ); //End return
-  } //End render
-} //End class
+    login = async () => {
+        let validarLog = await api.validarLog(this.state.username, this.state.pass)
+        
+        if(validarLog.status == 1){
+            this.props.navigation.navigate("Principal");
+        }else{
+            Alert.alert("Usuario o clave inválidas");
+        }
+
+    }
+
+    render(){
+        const navegar = this.props.navigation;
+
+        return(
+            <Container>
+                <Content padder contentContainerStyle = {misEstilos.content}>
+                    <Card>
+                        <CardItem header bordered>
+                            <Text style = {misEstilos.textCenter}>
+                            Inicio de sesión
+                            </Text>
+                        </CardItem>
+                        <CardItem bordered>
+                            <Body style = {misEstilos.body}>
+                                <Item inlineLabel>
+                                    <Icon type = 'FontAwesome' name = 'user'></Icon>
+                                    <Input placeholder = 'Nombre de usuario' onChangeText = {(username)=> this.setState({username})}/>
+                                </Item>
+                                <Item inlineLabel last>
+                                    <Icon type = 'FontAwesome'name = 'lock'></Icon>
+                                    <Input placeholder = 'Contraseña' onChangeText = {(pass)=> this.setState({pass})}/>
+                                </Item>
+                            </Body>
+                        </CardItem>
+                    <CardItem footer bordered>
+                        <Button primary onPress = {() => {navegar.navigate('Registro', {titulo: 'Registro de usuario', nombre: 'Jorge'});}}><Text>Registro</Text></Button>
+                        <Button succes style = {misEstilos.boton} onPress={()=>{this.login()}}><Text>Entrar</Text></Button>
+                        </CardItem>
+                    </Card>
+                </Content>
+            </Container>
+        );
+    }
+}
 
 const misEstilos = StyleSheet.create({
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  textCenter: {
-    textAlign: 'center',
-    fontSize: 20
-  },
-  modalBackground : {
-    flex : 1 ,
-    alignItems : 'center' ,
-    flexDirection : 'column' ,
-    justifyContent : 'space-around' ,
-    backgroundColor : '#FFFFFF'
-  } ,
-  activityIndicator : {
-    backgroundColor : '#FFFFFF' ,
-    height : 100 ,
-    width : 100 ,
-    borderRadius : 20 ,
-    display : 'flex' ,
-    alignItems : 'center' ,
-    justifyContent : 'space-around'
-  },
-  boton: {
-    marginLeft: '75%',
-    justifyContent: 'center',
-  },
-  boton1: {
-    marginLeft: '69%'
-  }
+    content: {
+        flex: 1,
+        justifyContent: 'center'
+    },
+    textCenter: {
+        textAlign: 'center',
+        width: '100%'
+    },
+    boton: {
+        marginLeft: '35%'
+    },
+    body: {
+        paddingVertical: 30
+    }
 });
-
-const style = {
-    color: 'white',
-    fontSize: 30,
-};
 
 export default Login;
