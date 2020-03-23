@@ -20,35 +20,39 @@ class Registro extends Component {
 
     return(
         <Container>
-            <Content padder contentContainerStyle = {misEstilos.content}>
-                <Card>
-                    <CardItem header bordered>
-                        <Text style = {misEstilos.textCenter}>
-                        {this.props.route.params.titulo}
-                        </Text>
-                    </CardItem>
-                    <CardItem bordered>
-                        <Body style = {misEstilos.body}>
-                            <Item inlineLabel>
-                                <Icon type = 'FontAwesome' name = 'envelope'></Icon>
-                                <Input placeholder = 'Correo electrónico' onChangeText = {(email)=> this.setState({email})}/>
-                            </Item>
-                            <Item inlineLabel>
-                                <Icon type = 'FontAwesome'name = 'user'></Icon>
-                                <Input placeholder = 'Nombre de usuario' onChangeText = {(user)=> this.setState({user})}/>
-                            </Item>
-                            <Item inlineLabel last>
-                                <Icon type = 'FontAwesome'name = 'lock'></Icon>
-                                <Input placeholder = 'Contraseña' onChangeText = {(pass)=> this.setState({pass})}/>
-                            </Item>
-                        </Body>
-                    </CardItem>
-                <CardItem footer bordered>
-                    <Button primary onPress = {() => {navegar.navigate('Login')}}><Text>Login</Text></Button>
-                    <Button succes style = {misEstilos.boton} onPress={()=>{this.register}}><Text>Guardar</Text></Button>
-                    </CardItem>
-                </Card>
-            </Content>
+        <Content padder contentContainerStyle = {misEstilos.content}>
+            <Card>
+            <CardItem header bordered>
+                <Text style = {misEstilos.textCenter}>
+                  {this.props.route.params.titulo}
+                </Text>
+            </CardItem>
+            <CardItem bordered>
+                <Body style = {misEstilos.body}>
+                <Item inlineLabel>
+                    <Icon type = 'FontAwesome' name = 'envelope'></Icon>
+                    <Input placeholder = 'Correo electrónico' onChangeText = {(email)=> this.setState({email})}/>
+                </Item>
+                <Item inlineLabel>
+                    <Icon type = 'FontAwesome'name = 'user'></Icon>
+                    <Input placeholder = 'Nombre de usuario' onChangeText = {(user)=> this.setState({user})}/>
+                </Item>
+                <Item inlineLabel last>
+                    <Icon type = 'FontAwesome'name = 'lock'></Icon>
+                    <Input placeholder = 'Contraseña' onChangeText = {(pass)=> this.setState({pass})}/>
+                </Item>
+                </Body>
+            </CardItem>
+            <CardItem footer bordered>
+                <Button primary onPress = {() => navegar.navigate('Login')}>
+                    <Text>Login</Text>
+                </Button>
+                <Button succes style = {misEstilos.boton} onPress={this.register}>
+                    <Text>Guardar</Text>
+                </Button>
+            </CardItem>
+            </Card>
+        </Content>
         </Container>
         );
     }

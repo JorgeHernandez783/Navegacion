@@ -1,11 +1,11 @@
 import { Alert } from 'react-native';
 
-const URL_DATA = 'http://196.168.1.68/iot/data/';
+const URL_DATA = 'http://192.168.1.68/iot/data/';
 
 class API {
 
     async validarLog(user, pass){
-        const query = await fetch((`${URL_DATA}login.php?user=${user}&pass=${pass}`));
+        const query = await fetch(`${URL_DATA}login.php?user=${user}&pass=${pass}`);
         const data = await query.json();
         return data;
     }
@@ -25,12 +25,12 @@ class API {
         }).then(response => response.json())
         .catch(error => console.error('Error: ', error))
         .then(response => {
-          if(response.status == 1){
+            if(response.status == 1){
               Alert.alert('Registro exitoso');
-          }
-          else{
+            }
+            else{
               Alert.alert('Ocurrio un error');
-          }  
+            }  
         });
     } //end registerData
 }

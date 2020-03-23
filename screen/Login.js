@@ -16,9 +16,9 @@ class Login extends Component {
         let validarLog = await api.validarLog(this.state.username, this.state.pass)
         
         if(validarLog.status == 1){
-            this.props.navigation.navigate("Principal");
+            this.props.navigation.navigate('Principal');
         }else{
-            Alert.alert("Usuario o clave inválidas");
+            Alert.alert('Usuario o clave inválidas');
         }
 
     }
@@ -48,8 +48,8 @@ class Login extends Component {
                             </Body>
                         </CardItem>
                     <CardItem footer bordered>
-                        <Button primary onPress = {() => {navegar.navigate('Registro', {titulo: 'Registro de usuario', nombre: 'Jorge'});}}><Text>Registro</Text></Button>
-                        <Button succes style = {misEstilos.boton} onPress={()=>{this.login()}}><Text>Entrar</Text></Button>
+                        <Button primary onPress = {() => {navegar.navigate('Registro', {titulo: 'Registro de usuario', nombre: 'Jorge',});}}><Text>Registro</Text></Button>
+                        <Button succes style = {misEstilos.boton} onPress={() => {this.login()}}><Text>Entrar</Text></Button>
                         </CardItem>
                     </Card>
                 </Content>
