@@ -19,10 +19,10 @@ class Registro extends Component {
         const navegar = this.props.navigation;
 
     return(
-        <Container>
+        <Container style={{backgroundColor: "#9A5025"}}>
         <Content padder contentContainerStyle = {misEstilos.content}>
             <Card>
-            <CardItem header bordered>
+            <CardItem header bordered style={{backgroundColor: "#FF985C"}}>
                 <Text style = {misEstilos.textCenter}>
                   {this.props.route.params.titulo}
                 </Text>

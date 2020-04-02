@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import { Container, Content, Card, CardItem, Body, Text, Button, Item, Input, Icon } from 'native-base';
+import { StyleSheet, Alert } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 
 class Principal extends Component{
@@ -11,43 +12,51 @@ class Principal extends Component{
     }
   } //end constructor
 
-  async componentDidMount(){
-      try{
-        const response = await fetch('https://reactnative.dev/movies.json');
-        const responseJson = await response.json();
-
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson.movies,
-        }, function(){
-        });
-      }
-      catch (error){
-          console.log(error);
-      }
-  } //end componentDidMount
-
   render(){
-    if(this.state.isLoading){
-      return(
-        <View style={{flex:1, padding: 20}}>
-          <ActivityIndicator/>
-        </View>
-      );
-    } // end if
+    const navegar = this.props.navigation;
 
     return(
-      <View>
-        <FlatList
-            data = {this.state.dataSource}
-            renderItem = {({item}) => 
-                <Text>{item.title}, {item.releaseYear}</Text>
-            }
-            keyExtractor = {({id}, index) => id}
-        />
-      </View>    
-      );
-  } //end render
-} //end class
+        <Container style={{backgroundColor: "#9A5025"}}>
+            <Content padder contentContainerStyle = {misEstilos.content}>
+                <Card >
+                    <CardItem header bordered>
+                    <Button success style = {misEstilos.boton1}><Text>Desarmador</Text></Button>
+                    </CardItem>
+                    <CardItem header bordered>
+                    <Button succes style = {misEstilos.boton2}><Text>Llave</Text></Button>
+                    </CardItem>
+                    <CardItem bordered>
+                    <Button success style = {misEstilos.boton3}><Text>Dado</Text></Button>
+                    </CardItem>
+                    <CardItem footer bordered>
+                    <Button success style = {misEstilos.boton4}><Text>Iman</Text></Button>
+                    </CardItem>
+                </Card>
+            </Content>
+        </Container>
+    );
+}
+}
+
+const misEstilos = StyleSheet.create({
+  content: {
+    flex: 1,
+    justifyContent: 'center'
+},
+boton1: {
+  textAlign: 'center',
+  marginLeft: '30%'
+},
+boton2: {
+  textAlign: 'center',
+  marginLeft: '37%'
+},
+boton3: {
+  marginLeft: '37%'
+},
+boton4: {
+  marginLeft: '37%'
+}
+});
 
 export default Principal;

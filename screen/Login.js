@@ -27,32 +27,33 @@ class Login extends Component {
         const navegar = this.props.navigation;
 
         return(
-            <Container>
+            <Container style={{backgroundColor: "#9A5025"}}>
                 <Content padder contentContainerStyle = {misEstilos.content}>
                     <Card>
-                        <CardItem header bordered>
+                        <CardItem header bordered style={{backgroundColor: "#FF985C"}}>
                             <Text style = {misEstilos.textCenter}>
                             Inicio de sesión
                             </Text>
                         </CardItem>
                         <CardItem bordered>
                             <Body style = {misEstilos.body}>
-                                <Item inlineLabel>
+                                <Item floatingLabel>
                                     <Icon type = 'FontAwesome' name = 'user'></Icon>
                                     <Input placeholder = 'Nombre de usuario' onChangeText = {(username)=> this.setState({username})}/>
                                 </Item>
-                                <Item inlineLabel last>
+                                <Item floatingLabel last>
                                     <Icon type = 'FontAwesome'name = 'lock'></Icon>
                                     <Input placeholder = 'Contraseña' onChangeText = {(pass)=> this.setState({pass})}/>
                                 </Item>
                             </Body>
                         </CardItem>
                     <CardItem footer bordered>
-                        <Button primary onPress = {() => {navegar.navigate('Registro', {titulo: 'Registro de usuario', nombre: 'Jorge',});}}><Text>Registro</Text></Button>
-                        <Button succes style = {misEstilos.boton} onPress={() => {this.login()}}><Text>Entrar</Text></Button>
+                        <Button dark onPress = {() => {navegar.navigate('Registro', {titulo: 'Registro de usuario', nombre: 'Jorge',});}}><Text>Registro</Text></Button>
+                        <Button dark style = {misEstilos.boton} onPress={() => {this.login()}}><Text>Entrar</Text></Button>
                         </CardItem>
                     </Card>
                 </Content>
+                <Button success style = {misEstilos.bot} onPress = {() => navegar.navigate('Equipo de Trabajo')}><Text>Equipo de trabajo</Text></Button>
             </Container>
         );
     }
@@ -68,10 +69,14 @@ const misEstilos = StyleSheet.create({
         width: '100%'
     },
     boton: {
-        marginLeft: '35%'
+        marginLeft: '30%'
     },
     body: {
         paddingVertical: 30
+    },
+    bot: {
+        justifyContent: 'center',
+        marginLeft: '0%'
     }
 });
 
