@@ -20,16 +20,7 @@ class Principal extends Component{
             <Content padder contentContainerStyle = {misEstilos.content}>
                 <Card >
                     <CardItem header bordered>
-                    <Button success style = {misEstilos.boton1}><Text>Desarmador</Text></Button>
-                    </CardItem>
-                    <CardItem header bordered>
-                    <Button succes style = {misEstilos.boton2}><Text>Llave</Text></Button>
-                    </CardItem>
-                    <CardItem bordered>
-                    <Button success style = {misEstilos.boton3}><Text>Dado</Text></Button>
-                    </CardItem>
-                    <CardItem footer bordered>
-                    <Button success style = {misEstilos.boton4}><Text>Iman</Text></Button>
+                    <Button success style = {misEstilos.bot} onPress = {() => navegar.navigate('Herramientas')}><Text>Activar</Text></Button>
                     </CardItem>
                 </Card>
             </Content>
@@ -43,19 +34,9 @@ const misEstilos = StyleSheet.create({
     flex: 1,
     justifyContent: 'center'
 },
-boton1: {
+bot: {
   textAlign: 'center',
-  marginLeft: '30%'
-},
-boton2: {
-  textAlign: 'center',
-  marginLeft: '37%'
-},
-boton3: {
-  marginLeft: '37%'
-},
-boton4: {
-  marginLeft: '37%'
+  marginLeft: '36%'
 }
 });
 
